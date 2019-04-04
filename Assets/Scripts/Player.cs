@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
         isDead = false;
         triggerGround = false;
         rb = GetComponent<Rigidbody2D>();
-        print(lives);
 
     }
 

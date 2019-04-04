@@ -15,6 +15,13 @@ public class Trigger_Ground : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         p.setTriggerGround(true);
+
+        if (collision.gameObject.name=="ennemy_Body")
+        {
+            Ennemy enm = (Ennemy) collision.gameObject.transform.parent.gameObject.GetComponent("Ennemy");
+            enm.getStomped();
+        }
+     
     }
 
 
