@@ -14,7 +14,6 @@ public class Trigger_Ground : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("couocou");
         p.setTriggerGround(true);
     }
 

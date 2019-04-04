@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     private float moveVertical;
 
+    private static int lives = 3;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
         isDead = false;
         triggerGround = false;
         rb = GetComponent<Rigidbody2D>();
+        print(lives);
+
     }
 
     // Update is called once per frame
