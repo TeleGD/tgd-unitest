@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: 
+  complimentarylives: -1
 --- !u!61 &4044031286410242001
 BoxCollider2D:
   m_ObjectHideFlags: 0

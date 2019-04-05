@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float Hspeed;
-    [SerializeField]
-    private float Vspeed;
+    [SerializeField] private float Hspeed;
+    [SerializeField] private float Vspeed;
+    [SerializeField] private bool isDead;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float velocityXmax=1;
 
-    [SerializeField]
-    private bool isDead;
 
-    [SerializeField]
-    private Rigidbody2D rb;
     public GameObject hitup;
     public GameObject hitdown;
 
@@ -42,22 +39,28 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate(){
-        // Stocke l'entrée horizontale dans la variable moveHorizontal.
-        float moveHorizontal = Input.GetAxis ("Horizontal");
+        
+        if (Mathf.Abs(rb.velocity.x)<=velocityXmax)
+        {
+            rb.AddForce(new Vector2( Hspeed* Input.GetAxis("Horizontal"),0)) ;
+        }
 
         // Stocke l'entrée verticale dans la variable moveVertical.
         if (triggerGround && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            rb.AddForce(new Vector2(0, 1 * Vspeed),ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0,  Vspeed),ForceMode2D.Impulse);
             triggerGround = false;
         }
+    }
 
+    public int getLives()
+    {
+        return lives;
+    }
 
-        // Utilise les deux nombres pour créer un Vector2.
-        moveDirection = new Vector2 (moveHorizontal*Hspeed, moveVertical*Vspeed);
-
-        // Appelle la fonction AddForce() du Rigidbody2D rb avec le mouvement multiplié par la vitesse.
-        rb.AddForce(moveDirection);
+    public void setLives(int l)
+    {
+        lives = l;
     }
 
     public void setTriggerGround(bool b)

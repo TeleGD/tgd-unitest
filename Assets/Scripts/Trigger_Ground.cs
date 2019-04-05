@@ -5,12 +5,6 @@ using UnityEngine;
 public class Trigger_Ground : MonoBehaviour
 {
     public Player p;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +12,7 @@ public class Trigger_Ground : MonoBehaviour
 
         if (collision.gameObject.name=="ennemy_Body")
         {
-            Ennemy enm = (Ennemy) collision.gameObject.transform.parent.gameObject.GetComponent("Ennemy");
+            Ennemy enm = collision.gameObject.GetComponentInParent<Ennemy>();
             enm.getStomped();
         }
      

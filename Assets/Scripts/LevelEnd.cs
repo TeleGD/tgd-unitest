@@ -6,22 +6,28 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     [SerializeField]
-    string nextLevel = "";
+    public string nextLevel = "";
+
+    [SerializeField]
+    public int complimentarylives=0;
 
     int lives;
 
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        loadLevel();
-        
+        if (collision.gameObject.tag == "Player")
+        {
+            Player p = collision.gameObject.GetComponentInParent<Player>();
+            p.setLives(p.getLives() + complimentarylives);
+            print("Lives : " +lives);
+            loadLevel();
+        }
     }
 
     private void loadLevel()
     {
         SceneManager.LoadScene(this.nextLevel);
-
     }
 }
 
