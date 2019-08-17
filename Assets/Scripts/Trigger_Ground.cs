@@ -18,6 +18,10 @@ public class Trigger_Ground : MonoBehaviour
      
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        p.setTriggerGround(false);
+    }
 
     // Update is called once per frame
     void Update()
