@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         isDead = false;
-        triggerGround = false;
+        triggerGround = true;
         rb = GetComponent<Rigidbody2D>();
         animator = sprite.GetComponent<Animator>();
     }
@@ -49,28 +49,35 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        changeOrientation(rb.velocity.x);
     }
 
+    // A utiliser pour tout ce qui concerne l'application de force et autre phenomens physiques
     void FixedUpdate(){
 
-        changeOrientation(rb.velocity.x);
+        if (triggerGround && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            rb.AddForce(new Vector2(0, Vspeed), ForceMode2D.Impulse);
+            setTriggerGround(false);
+        }
+
+        if (Mathf.Abs(rb.velocity.x) <= velocityXmax)
+        {
+            animator.SetBool("Bouge", Mathf.Abs(rb.velocity.x) != 0);
+            rb.AddForce(new Vector2(Hspeed * Input.GetAxis("Horizontal"), 0));
+        }
 
         
 
-        if (Mathf.Abs(rb.velocity.x)<=velocityXmax)
-        {
-                animator.SetBool("Bouge", Mathf.Abs(rb.velocity.x) != 0);
-                rb.AddForce(new Vector2( Hspeed* Input.GetAxis("Horizontal"),0)) ;
-        }
-
-        // Stocke l'entrée verticale dans la variable moveVertical.
-        if (triggerGround && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            rb.AddForce(new Vector2(0,  Vspeed),ForceMode2D.Impulse);
-            triggerGround = false;
-        }
+        
+        
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        setTriggerGround(true);
+    }
+
 
     public int getLives()
     {
