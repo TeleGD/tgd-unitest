@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isDead;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float velocityXmax=1;
+    [SerializeField] private float vel;
+    [SerializeField] private float frottements_air=1.0f;
 
     public GameObject sprite;
     public GameObject hitup;
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         changeOrientation(rb.velocity.x);
+        vel = rb.velocity.x;
     }
 
     // A utiliser pour tout ce qui concerne l'application de force et autre phenomens physiques
@@ -67,10 +70,9 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(Hspeed * Input.GetAxis("Horizontal"), 0));
         }
 
-        
+        if (Input.GetAxis("Horizontal")==0)
+            rb.AddForce(new Vector2(-frottements_air * rb.velocity.x, 0));
 
-        
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

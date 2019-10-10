@@ -130,11 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6141704a53c9f41489b7f130ab8cabf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hspeed: 5
+  Hspeed: 3
   Vspeed: 4
   isDead: 0
   rb: {fileID: 792955143733664710}
-  velocityXmax: 5
+  velocityXmax: 3
+  vel: 0
+  frottements_air: 3
   sprite: {fileID: 1138186135121605057}
   hitup: {fileID: 0}
   hitdown: {fileID: 0}
@@ -155,7 +157,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ae785127a1f79ff4aa7dad43bfe8143d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
